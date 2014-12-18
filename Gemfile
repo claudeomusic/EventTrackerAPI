@@ -1,5 +1,15 @@
 source 'https://rubygems.org'
 
+group :test do
+  gem 'capybara', '~> 2.3.0'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.0'
+end
+
+group :development, :test do
+  gem 'faker'
+  gem 'rspec-rails'
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.7'
@@ -25,9 +35,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'mongoid', '~> 4'
+gem 'moped'
 gem 'bson_ext'
 gem 'devise'
-
 # adding twitter bootstrap
 gem 'bootstrap-sass', '~> 3.1.1'
 
