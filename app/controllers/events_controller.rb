@@ -3,12 +3,10 @@ class EventsController < ApplicationController
   before_filter :set_headers
   respond_to :json
    
-  def index
-  end
 
   # initiates creation of event
   def create
-    @event = Event.create(event_params)
+    @event = current_user.events.create(event_params)
 
     # checking necessary fields
     if !event_params[:name]
@@ -23,12 +21,8 @@ class EventsController < ApplicationController
       render json: {success: false, message: "Error: missing property2 field"}, status:422
       return
     end
-    if !event_params[:created_on]
-      render json: {success: false, message: "Error: missing created_on field"}, status:422
-      return
-    end
-    if !event_params[:created_at]
-      render json: {success: false, message: "Error: missing created_at field"}, status:422
+    if !request.headers['Date']
+      render json: {success: false, message: "Error: missing date field"}, status:422
       return
     end
     if !request.referer 
@@ -40,6 +34,8 @@ class EventsController < ApplicationController
       return
     end
     
+    @event.created_on = Time.now
+    @event.created_at = request.headers['Date']
     @event.referer_URL = request.referer
     @event.domain = request.domain
     

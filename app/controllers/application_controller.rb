@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user_from_token!
     user_email = request.headers["X-API-EMAIL"].presence
     user_auth_token = request.headers["X-API-TOKEN"]
-    user = user_email && User.find_by_email(user_email)
+    user = user_email && User.find_by(email: user_email)
 
     if user && Devise.secure_compare(user.authentication_token, user_auth_token)
       sign_in(user, store: false)

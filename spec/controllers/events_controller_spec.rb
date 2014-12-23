@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe EventsController do 
 
+  include Devise::TestHelpers
   before do
-    @user = create(:user)
+    @user = FactoryGirl.create(:user)
     sign_in @user
   end
 
@@ -11,7 +12,7 @@ describe EventsController do
 
     it "responds successfully with an HTTP 200 status code" do
       # how to tie user to event creation here?
-      post :create
+      post :create, {}
       expect(response).to be_success
       expect(response).to have_http_status(200)
     end
