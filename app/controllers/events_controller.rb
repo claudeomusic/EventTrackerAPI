@@ -2,7 +2,9 @@ class EventsController < ApplicationController
   
   before_filter :set_headers
   respond_to :json
-   
+  
+  def index
+  end
 
   # initiates creation of event
   def create
@@ -56,8 +58,9 @@ class EventsController < ApplicationController
     def set_headers
       headers['Access-Control-Allow-Origin'] = '*'
       headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-      headers['Access-Control-Allow-Headers'] = 'Content-Type'
+      headers['Access-Control-Allow-Headers'] = 'Content-Type, X-API-EMAIL, X-API-TOKEN'
       headers['Access-Control-Max-Age'] = '1728000'
+
     end
 
     def event_params
