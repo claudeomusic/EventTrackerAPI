@@ -9,12 +9,9 @@ var sendEventToAPI = function(name, property1, property2, email, token){
       type: "POST",
       dataType: "json",
       url: "http://localhost:3001/events",
-      data: {event: _event},
+      data: {event: _event, email: email, auth_token: token},
       crossDomain: true,
       xhrFields: {withCredentials: true},
-      headers: {
-        'X-API-EMAIL': email,
-        'X-API-TOKEN': token
-      }
+      
     })
 }

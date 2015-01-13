@@ -23,10 +23,10 @@ class EventsController < ApplicationController
       render json: {success: false, message: "Error: missing property2 field"}, status:422
       return
     end
-    if !request.headers['Date']
-      render json: {success: false, message: "Error: missing date field"}, status:422
-      return
-    end
+    # if !request.headers['Date']
+    #   render json: {success: false, message: "Error: missing date field"}, status:422
+    #   return
+    # end
     if !request.referer 
       render json: {success: false, message: "Error: missing referer field"}, status:422
       return
